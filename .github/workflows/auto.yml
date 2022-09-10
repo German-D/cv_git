@@ -12,13 +12,6 @@ jobs:
     name: Запуск CSS линтера
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Пройти проверки CSS линтера
-      uses: actions-hub/stylelint@master
-      env:        
-        PATTERN: "**/*.css"
-      continue-on-error: true
     - name: Send telegram message on push
       uses: appleboy/telegram-action@master
       with:
@@ -32,3 +25,10 @@ jobs:
             
           CI/CD github actions: https://github.com/${{ github.repository }}/actions
           https://github.com/${{ github.repository }}/actions/runs/${{github.run_id}}
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Пройти проверки CSS линтера
+      uses: actions-hub/stylelint@master
+      env:        
+        PATTERN: "**/*.css"
+      continue-on-error: true
