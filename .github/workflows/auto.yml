@@ -30,3 +30,4 @@ jobs:
           Репозиторий: ${{ github.repository }}
             
           CI/CD github actions: https://github.com/${{ github.repository }}/actions
+          https://github.com/${{ github.repository }}/actions/runs/${{github.run_id}}
