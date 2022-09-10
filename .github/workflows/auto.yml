@@ -1,11 +1,10 @@
-name: Auto PullRequest
+name: Линтер и Телеграм
 on:
   push:
     branches:
       - main
   pull_request:
     types: [opened, reopened]
-  workflow_dispatch:
 
 jobs:
   build:
