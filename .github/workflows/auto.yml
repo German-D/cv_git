@@ -1,0 +1,40 @@
+name: Auto PullRequest
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  build:
+    name: CSS lint
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: CSS lint with stylelint
+      uses: actions-hub/stylelint@master
+      env:        
+        PATTERN: "**/*.css"
+    continue-on-error: true
+
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to production
+        run: echo deploying
+      - name: Send telegram message on push
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TG_ID }}
+          token: ${{ secrets.TG_TOKEN }}
+          message: |
+            ${{ github.actor }} created commit:
+            Commit message: ${{ github.event.commits[0].message }}
+            
+            Repository: ${{ github.repository }}
+            
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
