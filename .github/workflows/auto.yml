@@ -32,9 +32,10 @@ jobs:
           to: ${{ secrets.TG_ID }}
           token: ${{ secrets.TG_TOKEN }}
           message: |
-            ${{ github.actor }} created commit:
-            Commit message: ${{ github.event.commits[0].message }}
+            ${{ github.actor }} создал коммит:
+            Название коммита: ${{ github.event.commits[0].message }}
+            Состав коммита: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+            Репозиторий: ${{ github.repository }}
             
-            Repository: ${{ github.repository }}
-            
-            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+            CI/CD github actions: https://github.com/${{ github.repository }}/actions
+
